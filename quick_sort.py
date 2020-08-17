@@ -32,7 +32,7 @@ def quickSort(array):
     """
     array_length = len(array)
 
-    if  array_length <= 1:
+    if array_length <= 1:
         return array
 
     if array_length == 2:

@@ -10,51 +10,88 @@ import random
 import time
 
 from array_manager import print_array, generate_array
-
 from bubble_sort import bubbleSort
 from quick_sort import quickSort
 from merge_sort import mergeSort
 
 
+"""
+    Array generator settings.
+"""
+# Set amount of elements in array
+ARRAY_SIZE = 500
+
+# Set amount of rounds to sort array
+ROUNDS = 1_000
+
+# All elements are unique or can be repeated?
+IS_UNIQUE = True
+
+# Set this to True to create sorted arrays
+IS_SORTED = False
+
+
 if __name__ == '__main__':
-    # Set up timing environment.
-    rounds = 1_000  # How many rounds algorithm will sort an array.
-    array_size = 500    # How many elements are in array.
-    is_unique = True   # All elements are unique or can be repeated?
-    is_sorted = False   # Elements in array are in sorted or unsorted order?
+    # Generate an array.
+    generated_array = generate_array(ARRAY_SIZE, IS_UNIQUE, IS_SORTED)
 
-    array = generate_array(array_size, is_unique, is_sorted)
-
-    print_array(array, text=f'Array [{len(array)}]')
+    print(f'Parameters of testing:\n'
+          f'\tArray size: {ARRAY_SIZE}\n'
+          f'\tUnique elements: {IS_UNIQUE}\n'
+          f'\tArray is already sorted: {IS_SORTED}\n'
+          f'\tSorting rounds: {ROUNDS}\n')
+    print_array(generated_array, text=f'Array [{len(generated_array)}]')
 
     # Time up bubble sort.
+    print('\nBubble sort...')
+    array = generated_array.copy()
+
     start_time = time.perf_counter()
-    for i in range(rounds):
-        bubbleSort(array)
+    for i in range(ROUNDS):
+        bubbleSort(array.copy())
     end_time = time.perf_counter()
-    bubble_time = end_time - start_time
-    bubbled_array = bubbleSort(array)
+
+    bubbleSort(array)
+    print_array(array, text=f'Bubble sorted array [{len(array)}]')
+    print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({ROUNDS} rounds)', end_time - start_time))
 
     # Time up quick sort.
+    print('\nQuick sort...')
+    array = generated_array.copy()
+
     start_time = time.perf_counter()
-    for i in range(rounds):
-        quickSort(array)
+    for i in range(ROUNDS):
+        quickSort(array.copy())
     end_time = time.perf_counter()
-    quick_time = end_time - start_time
-    quicked_array = quickSort(array)
+
+    array = quickSort(array)
+    print_array(array, text=f'Quick sorted array [{len(array)}]')
+    print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({ROUNDS} rounds)', end_time - start_time))
 
     # Time up merge sort.
-    start_time = time.perf_counter()
-    for i in range(rounds):
-        mergeSort(array)
-    end_time = time.perf_counter()
-    merge_time = end_time - start_time
-    merged_array = mergeSort(array)
+    print('\nMerge sort...')
+    array = generated_array.copy()
+    # print_array(array, text=f'Array [{len(array)}]')
 
-    # Summary.
-    print_array(bubbled_array, text=f'Bubble sorted array [{len(bubbled_array)}]')
-    print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({rounds} rounds)', bubble_time))
-    print_array(bubbled_array, text=f'Quick sorted array [{len(quicked_array)}]')
-    print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({rounds} rounds)', quick_time))
-    print_array(bubbled_array, text=f'Merge sorted array [{len(merged_array)}]')
-    print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({rounds} rounds)', merge_time))
+    start_time = time.perf_counter()
+    for i in range(ROUNDS):
+        mergeSort(array.copy())
+    end_time = time.perf_counter()
+
+    array = mergeSort(array)
+    print_array(array, text=f'Merge sorted array [{len(array)}]')
+    print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({ROUNDS} rounds)', end_time - start_time))
+
+    # # Time up Python sort.
+    print('\nPython sort...')
+    array = generated_array.copy()
+
+    start_time = time.perf_counter()
+    for i in range(ROUNDS):
+        sorting_array = array.copy()
+        sorting_array.sort()
+    end_time = time.perf_counter()
+
+    array.sort()
+    print_array(array, text=f'Python sorted array [{len(array)}]')
+    print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({ROUNDS} rounds)', end_time - start_time))
