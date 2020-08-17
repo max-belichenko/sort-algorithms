@@ -1,5 +1,6 @@
-# Local settings
-#mysite/local_settings.py
+Pipfile
+Pipfile.lock
+.idea/*
 
 
 # Byte-compiled / optimized / DLL files
