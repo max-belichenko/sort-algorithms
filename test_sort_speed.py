@@ -13,6 +13,7 @@ from array_manager import print_array, generate_array
 from bubble_sort import bubbleSort
 from quick_sort import quickSort
 from merge_sort import mergeSort
+from selection_sort import selection_sort
 
 
 """
@@ -43,6 +44,7 @@ if __name__ == '__main__':
     print_array(generated_array, text=f'Array [{len(generated_array)}]')
 
     # Time up bubble sort.
+
     print('\nBubble sort...')
     array = generated_array.copy()
 
@@ -55,7 +57,22 @@ if __name__ == '__main__':
     print_array(array, text=f'Bubble sorted array [{len(array)}]')
     print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({ROUNDS} rounds)', end_time - start_time))
 
+    # Time up selection sort.
+
+    print('\nSelection sort...')
+    array = generated_array.copy()
+
+    start_time = time.perf_counter()
+    for i in range(ROUNDS):
+        selection_sort(array.copy())
+    end_time = time.perf_counter()
+
+    array = selection_sort(array)
+    print_array(array, text=f'Selection sorted array [{len(array)}]')
+    print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({ROUNDS} rounds)', end_time - start_time))
+
     # Time up quick sort.
+
     print('\nQuick sort...')
     array = generated_array.copy()
 
@@ -69,9 +86,9 @@ if __name__ == '__main__':
     print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({ROUNDS} rounds)', end_time - start_time))
 
     # Time up merge sort.
+
     print('\nMerge sort...')
     array = generated_array.copy()
-    # print_array(array, text=f'Array [{len(array)}]')
 
     start_time = time.perf_counter()
     for i in range(ROUNDS):
@@ -82,7 +99,8 @@ if __name__ == '__main__':
     print_array(array, text=f'Merge sorted array [{len(array)}]')
     print('{:>30} : {:.6f} seconds'.format(f'Elapsed time ({ROUNDS} rounds)', end_time - start_time))
 
-    # # Time up Python sort.
+    # Time up Python sort.
+
     print('\nPython sort...')
     array = generated_array.copy()
 
