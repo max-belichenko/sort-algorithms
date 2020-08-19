@@ -89,7 +89,7 @@ def print_array(array, text='', start_idx=None, end_idx=None, idx_red=-1, idx_gr
     print('{:>30} : {}'.format(text, array_string))
 
 
-def generate_array(array_size, is_unique=True, is_sorted=False):
+def generate_array(array_size, is_unique=True, is_sorted=False, is_reversed=False):
     if is_unique:
         array = [x for x in range(array_size)]
         if not is_sorted:
@@ -97,5 +97,5 @@ def generate_array(array_size, is_unique=True, is_sorted=False):
     else:
         array = [random.randint(0, 100) for _ in range(array_size)]
         if is_sorted:
-            array.sort()
+            array.sort(reverse=is_reversed)
     return array

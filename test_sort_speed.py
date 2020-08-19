@@ -2,11 +2,11 @@
 Run three different sort algorithms and note the time it takes to sort specified array of numbers.
 
 Sort algorithms:
-    Bubble Sort - average: O(n*n)
-    Quick Sort - best: O(n log n) worst: O(n*n)
-    Merge Sort - average: O(n log n)
+    Bubble Sort     average: O(n*n)
+    Selection Sort  average: O(n*n)
+    Quick Sort      average: O(n log n)      worst: O(n*n)
+    Merge Sort      average: O(n log n)
 """
-import random
 import time
 
 from array_manager import print_array, generate_array
@@ -26,20 +26,24 @@ ARRAY_SIZE = 500
 ROUNDS = 1_000
 
 # All elements are unique or can be repeated?
-IS_UNIQUE = True
+IS_UNIQUE = False
 
 # Set this to True to create sorted arrays
 IS_SORTED = False
 
+# Set this to True to create reversed sorted arrays
+IS_SORT_REVERSED = False
+
 
 if __name__ == '__main__':
     # Generate an array.
-    generated_array = generate_array(ARRAY_SIZE, IS_UNIQUE, IS_SORTED)
+    generated_array = generate_array(ARRAY_SIZE, IS_UNIQUE, IS_SORTED, IS_SORT_REVERSED)
 
-    print(f'Parameters of testing:\n'
+    print(f'Testing parameters:\n'
           f'\tArray size: {ARRAY_SIZE}\n'
           f'\tUnique elements: {IS_UNIQUE}\n'
           f'\tArray is already sorted: {IS_SORTED}\n'
+          f'\tSorting is reversed: {IS_SORT_REVERSED}\n'
           f'\tSorting rounds: {ROUNDS}\n')
     print_array(generated_array, text=f'Array [{len(generated_array)}]')
 
